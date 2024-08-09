@@ -166,9 +166,19 @@ public:
     int send_data(const void *msg, int len){
 
 
+        std::cout << "beffore\n" << std::flush;
         void *addr;
         char ipstr[INET6_ADDRSTRLEN];
         int port;
+        if (servinfo->ai_family == AF_INET) { // IPv4
+            struct sockaddr_in *ipv4 = (struct sockaddr_in *)servinfo->ai_addr;
+            addr = &(ipv4->sin_addr);
+            port = ntohs(ipv4->sin_port);
+        } else { // IPv6
+            struct sockaddr_in6 *ipv6 = (struct sockaddr_in6 *)servinfo->ai_addr;
+            addr = &(ipv6->sin6_addr);
+            port = ntohs(ipv6->sin6_port);
+        }
         inet_ntop(servinfo->ai_family, addr, ipstr, sizeof ipstr);
         std::cout << "Sending message to IP: " << ipstr << " Port: " << port << std::endl;
 
