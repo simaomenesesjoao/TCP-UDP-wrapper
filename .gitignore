@@ -1,0 +1,4 @@
+tests/tcp/client
+tests/tcp/server
+tests/udp/client
+tests/udp/server

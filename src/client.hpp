@@ -8,13 +8,7 @@
 #include <sys/types.h>
 #include <sys/socket.h>
 
-class Client{
-public: 
-    virtual int send_data(const void*, int){return 0;};
-    virtual int continuous_connect(){return 0;};
-};
-
-class TCPClient: public Client{
+class TCPClient{
 private:
     int socket_fd;
     int verbose_level=0;
@@ -146,7 +140,7 @@ public:
 
 
 
-class UDPClient: public Client{
+class UDPClient{
 private:
     int socket_fd;
 
