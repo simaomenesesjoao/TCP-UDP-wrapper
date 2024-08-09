@@ -192,7 +192,9 @@ public:
 
         int n = sendto(socket_fd, msg, len, MSG_CONFIRM, 
                servinfo->ai_addr, servinfo->ai_addrlen);
-        
+
+        if(verbose_level>0)
+            std::cout << "Data sent: " << n << " bytes.\n";
     
         return n;
     }
@@ -200,7 +202,7 @@ public:
     int receive_data(void *msg, int len){
 
         // Receive
-        socklen_t claddr_len;
+        // socklen_t claddr_len;
         int n = recvfrom(socket_fd, msg, len,  
                 MSG_WAITALL, NULL, NULL);
 
@@ -222,22 +224,3 @@ public:
     }
 
 };
-
-
-// int main(){
-
-//     // TCPClient client("127.0.0.1", "8081", 1);
-//     // client.client_connect();
-
-//     // int data[5]{1,2,1,2, 4};
-//     // client.send_data(data, 5*sizeof(int));
-
-
-
-//     UDPClient client("127.0.0.1", "8081", 1);
-
-//     int data[5]{1,2,1,2, 4};
-//     client.send_data(data, 5*sizeof(int));
-
-//     return 0;
-// }

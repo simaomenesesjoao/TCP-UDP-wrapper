@@ -7,6 +7,7 @@
 #include <netdb.h>
 #include <sys/types.h>
 #include <sys/socket.h>
+#include <cerrno>
 
 
 class TCPInstance{
@@ -215,7 +216,9 @@ public:
 
         if(n>0)
             client_contacted = true;
-        
+        if (n < 0) {
+            std::cerr << "recvfrom failed: " << strerror(errno) << std::endl;
+        }
         if(verbose_level>0)
             std::cout << "message received, length " << n << " bytes\n";
 
