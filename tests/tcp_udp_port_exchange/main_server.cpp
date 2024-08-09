@@ -13,7 +13,7 @@ int main(int argc, char** argv){
     UDPServer UDP(portUDP);
 
     std::string msg = "OK,PORT="+portUDP;
-    connection.send_data(msg.c_str(), msg.size());
+    connection.send_data(msg.c_str(), msg.size()+1);
     
     // char buffer[100];
     // UDP.receive_data(buffer, 100);
