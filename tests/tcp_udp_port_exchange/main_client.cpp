@@ -17,8 +17,8 @@ int main(int argc, char** argv){
     std::cout << "UDP port received: " << portUDP << "\n";
 
     UDPClient UDP(IP, portUDP);
-    std::string msg = "OK";
-    UDP.send_data(msg.c_str(), msg.size());
+    std::string msg = "UDP OK";
+    UDP.send_data(msg.c_str(), msg.size()+1);
 
 
 
