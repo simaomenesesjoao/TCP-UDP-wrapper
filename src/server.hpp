@@ -209,12 +209,13 @@ public:
         if(verbose_level>0)
             std::cout << "Listening to message\n";
         
-        socklen_t claddr_len;
+        socklen_t claddr_len = sizeof(struct sockaddr_in);
+        
         int n = recvfrom(socket_fd, msg, len,  
                 MSG_WAITALL, ( struct sockaddr *) &cliaddr, 
                 &claddr_len);
 
-        
+
         char *client_ip = inet_ntoa(cliaddr.sin_addr);
         int client_port = ntohs(cliaddr.sin_port);
         std::cout << "From IP: " << client_ip << " Port: " << client_port << std::endl;
