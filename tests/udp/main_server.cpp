@@ -14,6 +14,13 @@ int main(int argc, char** argv){
 
 
 
+
+
+    std::cout << "Sending doubled data back\n";
+    server.send_data(data, 5*sizeof(int));
+
+
+
     server.receive_data(data, 5*sizeof(int));
     
     std::cout << "Message:\n"; 
@@ -22,12 +29,6 @@ int main(int argc, char** argv){
         data[i] *= 2; // double the data
     }
     std::cout << "\n";
-
-
-
-
-    std::cout << "Sending doubled data back\n";
-    server.send_data(data, 5*sizeof(int));
 
     return 0;
 }
