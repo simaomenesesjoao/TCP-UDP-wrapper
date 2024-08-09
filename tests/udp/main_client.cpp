@@ -12,7 +12,7 @@ int main(int argc, char** argv){
     int data_rec[5];
     client.print_current_address();
     client.receive_data(data_rec, 5*sizeof(int));
-    std::cout << "Message received:\n"; 
+    std::cout << "Message received:"; 
     for(int i=0; i<5; i++)std::cout << data_rec[i];
     std::cout << "\n";
 

@@ -8,7 +8,7 @@ int main(int argc, char** argv){
     int data[5];
     server.print_current_address();
     server.receive_data(data, 5*sizeof(int));
-    std::cout << "Message received: \n"; 
+    std::cout << "Message received:"; 
     for(int i=0; i<5; i++) std::cout << data[i];
     std::cout << "\n";
 
@@ -23,7 +23,7 @@ int main(int argc, char** argv){
 
     server.receive_data(data, 5*sizeof(int));
     server.print_current_address();
-    std::cout << "Message received:\n"; 
+    std::cout << "Message received:"; 
     for(int i=0; i<5; i++)std::cout << data[i] << " ";
     std::cout << "\n";
 
