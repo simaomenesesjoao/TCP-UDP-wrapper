@@ -14,7 +14,7 @@ int main(int argc, char** argv){
 
 
 
-    // server.receive_data(data, 5*sizeof(int));
+    server.receive_data(data, 5*sizeof(int));
     
     std::cout << "Message:\n"; 
     for(int i=0; i<5; i++){
