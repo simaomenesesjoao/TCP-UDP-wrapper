@@ -13,5 +13,8 @@ int main(int argc, char** argv){
         std::cout << data[i] << " ";
     std::cout << "\n";
 
+    std::cout << "Sending same data back\n";
+    server.send_data(data, 5*sizeof(int));
+
     return 0;
 }
