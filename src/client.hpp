@@ -45,31 +45,6 @@ public:
         if(verbose_level>0){
             std::cout << "Client ready\n";
         }
-
-
-        // struct addrinfo *p;
-        // char ipstr[INET6_ADDRSTRLEN];
-        // for(p = res;p != NULL; p = p->ai_next) {
-        //     void *addr;
-        //     char *ipver;
-
-        //     // get the pointer to the address itself,
-        //     // different fields in IPv4 and IPv6:
-        //     if (p->ai_family == AF_INET) { // IPv4
-        //         struct sockaddr_in *ipv4 = (struct sockaddr_in *)p->ai_addr;
-        //         addr = &(ipv4->sin_addr);
-        //         ipver = "IPv4";
-        //     } else { // IPv6
-        //         struct sockaddr_in6 *ipv6 = (struct sockaddr_in6 *)p->ai_addr;
-        //         addr = &(ipv6->sin6_addr);
-        //         ipver = "IPv6";
-        //     }
-
-        //     // convert the IP to a string and print it:
-        //     inet_ntop(p->ai_family, addr, ipstr, sizeof ipstr);
-        //     printf("  %s: %s\n", ipver, ipstr);
-        // }
-
     }
 
     ~TCPClient(){
@@ -202,7 +177,6 @@ public:
     int receive_data(void *msg, int len){
 
         // Receive
-        // socklen_t claddr_len;
         int n = recvfrom(socket_fd, msg, len,  
                 MSG_WAITALL, NULL, NULL);
 
