@@ -3,15 +3,18 @@
 
 int main(int argc, char** argv){
 
-    std::string port = "8447";
+    std::string portTCP = "8447";
     std::string IP = "194.164.120.17";
-    TCPClient TCP(IP, port);
+    TCPClient TCP(IP, portTCP);
     TCP.continuous_connect();
 
     char buffer[100];
     TCP.receive_data(buffer, 100);
-    std::cout << "Received: " << std::string(buffer) << "\n";
+    std::string response = std::string(buffer);
+    std::cout << "Received: " << response << "\n";
 
+    std::string portUDP = response.substr(0, response.find("="));
+    std::cout << "UDP port received: " << portUDP << "\n";
     std::string msg = "OK";
     // UDP.send_data(msg.c_str(), msg.size());
 
