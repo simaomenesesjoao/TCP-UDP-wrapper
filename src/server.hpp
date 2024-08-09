@@ -211,14 +211,18 @@ public:
         
         socklen_t claddr_len = sizeof(struct sockaddr_in);
         
+        char *client_ip = inet_ntoa(cliaddr.sin_addr);
+        int client_port = ntohs(cliaddr.sin_port);
+        std::cout << "Address before recvfrom. IP: " << client_ip << " Port: " << client_port << std::endl;
+
         int n = recvfrom(socket_fd, msg, len,  
                 MSG_WAITALL, ( struct sockaddr *) &cliaddr, 
                 &claddr_len);
 
 
-        char *client_ip = inet_ntoa(cliaddr.sin_addr);
-        int client_port = ntohs(cliaddr.sin_port);
-        std::cout << "From IP: " << client_ip << " Port: " << client_port << std::endl;
+        client_ip = inet_ntoa(cliaddr.sin_addr);
+        client_port = ntohs(cliaddr.sin_port);
+        std::cout << "Address after recvfrom. IP: " << client_ip << " Port: " << client_port << std::endl;
 
         if(n>0)
             client_contacted = true;
