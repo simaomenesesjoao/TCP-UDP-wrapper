@@ -7,27 +7,20 @@ int main(int argc, char** argv){
 
     int data[5];
     server.receive_data(data, 5*sizeof(int));
-    
-    std::cout << "Message:\n"; 
+    std::cout << "Message received:\n"; 
     for(int i=0; i<5; i++) std::cout << data[i];
     std::cout << "\n";
 
 
-
-
-
     std::cout << "Sending doubled data back\n";
+    for(int i=0; i<5; i++)data[i] *= 2;
     server.send_data(data, 5*sizeof(int));
 
 
 
     server.receive_data(data, 5*sizeof(int));
-    
-    std::cout << "Message:\n"; 
-    for(int i=0; i<5; i++){
-        std::cout << data[i] << " ";
-        data[i] *= 2; // double the data
-    }
+    std::cout << "Message received:\n"; 
+    for(int i=0; i<5; i++)std::cout << data[i] << " ";
     std::cout << "\n";
 
     return 0;
