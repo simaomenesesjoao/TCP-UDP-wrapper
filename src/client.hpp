@@ -177,8 +177,13 @@ public:
     int receive_data(void *msg, int len){
 
         // Receive
+        if(verbose_level>0)
+            std::cout << "Listening to message\n";
         int n = recvfrom(socket_fd, msg, len,  
                 MSG_WAITALL, NULL, NULL);
+
+        if(verbose_level>0)
+            std::cout << "message received, length " << n << " bytes\n";
 
 
         return n;
