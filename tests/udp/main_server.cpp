@@ -7,7 +7,7 @@ int main(int argc, char** argv){
 
     int data[5];
     server.receive_data(data, 5*sizeof(int));
-    std::cout << "Message received:\n"; 
+    std::cout << "Message received: \n"; 
     for(int i=0; i<5; i++) std::cout << data[i];
     std::cout << "\n";
 
