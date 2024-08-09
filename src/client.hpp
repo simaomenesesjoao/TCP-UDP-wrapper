@@ -165,6 +165,14 @@ public:
 
     int send_data(const void *msg, int len){
 
+
+        void *addr;
+        char ipstr[INET6_ADDRSTRLEN];
+        int port;
+        inet_ntop(p->ai_family, addr, ipstr, sizeof ipstr);
+        std::cout << "Sending message to IP: " << ipstr << " Port: " << port << std::endl;
+
+
         int n = sendto(socket_fd, msg, len, MSG_CONFIRM, 
                servinfo->ai_addr, servinfo->ai_addrlen);
 
