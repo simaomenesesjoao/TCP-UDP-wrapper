@@ -7,9 +7,14 @@ int main(int argc, char** argv){
     std::string IP = "194.164.120.17";
     TCPClient TCP(IP, port);
     TCP.continuous_connect();
+
     char buffer[100];
     TCP.receive_data(buffer, 100);
-    std::cout << std::string(buffer) << "\n";
+    std::cout << "Received: " << std::string(buffer) << "\n";
+
+    std::string msg = "OK";
+    // UDP.send_data(msg.c_str(), msg.size());
+
 
 
 
