@@ -10,7 +10,7 @@ int main(int argc, char** argv){
 
 
     int data_rec[5];
-    client.receive_data(data, 5*sizeof(int));
+    client.receive_data(data_rec, 5*sizeof(int));
     
     std::cout << "Message:\n"; 
     for(int i=0; i<5; i++)
