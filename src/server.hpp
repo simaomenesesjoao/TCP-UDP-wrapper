@@ -191,6 +191,10 @@ public:
     }
 
     int send_data(const void *msg, int len){
+        
+        char *client_ip = inet_ntoa(cliaddr.sin_addr);
+        int client_port = ntohs(cliaddr.sin_port);
+        std::cout << "Address before sendto. IP: " << client_ip << " Port: " << client_port << std::endl;
 
         int n = -1;
         if(client_contacted)
@@ -199,7 +203,10 @@ public:
         else{
             std::cout << "Client has not contacted yet. I don't know where to send data.\n";
         }
-           
+        client_ip = inet_ntoa(cliaddr.sin_addr);
+        client_port = ntohs(cliaddr.sin_port);
+        std::cout << "Address after sendto. IP: " << client_ip << " Port: " << client_port << std::endl;
+
     
         return n;
     }
