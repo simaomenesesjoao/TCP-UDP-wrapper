@@ -179,6 +179,8 @@ public:
             exit(EXIT_FAILURE);
         }
 
+        if(verbose_level>0)
+            std::cout << "Client ready\n";
 
     }
 
