@@ -214,6 +214,11 @@ public:
                 MSG_WAITALL, ( struct sockaddr *) &cliaddr, 
                 &claddr_len);
 
+        
+        char *client_ip = inet_ntoa(cliaddr.sin_addr);
+        int client_port = ntohs(cliaddr.sin_port);
+        std::cout << "From IP: " << client_ip << " Port: " << client_port << std::endl;
+
         if(n>0)
             client_contacted = true;
         if (n<0)  
