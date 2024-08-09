@@ -1,4 +1,4 @@
-#include "server.hpp"
+#include "../../src/server.hpp"
 #include <iostream>
 
 int main(int argc, char** argv){
