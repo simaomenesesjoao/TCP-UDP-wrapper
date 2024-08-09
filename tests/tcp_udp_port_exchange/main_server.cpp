@@ -15,9 +15,10 @@ int main(int argc, char** argv){
     std::string msg = "OK,PORT="+portUDP;
     connection.send_data(msg.c_str(), msg.size()+1);
     
-    // char buffer[100];
-    // UDP.receive_data(buffer, 100);
-    // std::cout << std::string(buffer) << "\n";
+
+    char buffer[100];
+    UDP.receive_data(buffer, 100);
+    std::cout << "server received: " << std::string(buffer) << "\n";
 
 
 

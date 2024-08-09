@@ -13,10 +13,12 @@ int main(int argc, char** argv){
     std::string response = std::string(buffer);
     std::cout << "Received: " << response << "\n";
 
-    std::string portUDP = response.substr(0, response.find("="));
+    std::string portUDP = response.substr( response.find("=")+1, response.size());
     std::cout << "UDP port received: " << portUDP << "\n";
+
+    UDPClient UDP(IP, portUDP);
     std::string msg = "OK";
-    // UDP.send_data(msg.c_str(), msg.size());
+    UDP.send_data(msg.c_str(), msg.size());
 
 
 
