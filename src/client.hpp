@@ -169,7 +169,7 @@ public:
         void *addr;
         char ipstr[INET6_ADDRSTRLEN];
         int port;
-        inet_ntop(p->ai_family, addr, ipstr, sizeof ipstr);
+        inet_ntop(servinfo->ai_family, addr, ipstr, sizeof ipstr);
         std::cout << "Sending message to IP: " << ipstr << " Port: " << port << std::endl;
 
 
