@@ -6,11 +6,11 @@ int main(int argc, char** argv){
     UDPServer server("8448",1);
 
     int data[5];
-    // server.receive_data(data, 5*sizeof(int));
+    server.receive_data(data, 5*sizeof(int));
     
-    // std::cout << "Message:\n"; 
-    // for(int i=0; i<5; i++) std::cout << data[i];
-    // std::cout << "\n";
+    std::cout << "Message:\n"; 
+    for(int i=0; i<5; i++) std::cout << data[i];
+    std::cout << "\n";
 
 
 
