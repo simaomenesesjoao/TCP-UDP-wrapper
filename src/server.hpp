@@ -249,3 +249,38 @@ public:
     }
 
 };
+
+class MultiServer{
+private:
+    TCPInstance TCP;
+    UDPServer UDP;
+    std::string portUDP;
+
+public:
+    MultiServer(int fd, std::string portUDP):portUDP(portUDP),TCP(fd),UDP(portUDP){
+
+    }
+
+    void handshake(){
+        // Inform the client about the UDP port available
+        std::string msg = "OK,PORT="+portUDP;
+        TCP.send_data(msg.c_str(), msg.size()+1);
+        
+        // Receive acknowledgement from client. This step may be important for NAT traversal
+        // Server already has an open port for UDP, so hope punching is not required
+        // This step also sets the client's address in the UDP server
+        char buffer[100];
+        UDP.receive_data(buffer, 100);
+        std::cout << "server received: " << std::string(buffer) << "\n";
+        UDP.print_current_address();
+
+        // Acknowledge UDP packet received
+        msg = "UDP packet received";
+        TCP.send_data(msg.c_str(), msg.size()+1);
+
+        TCP.receive_data(buffer, 100);
+        std::cout << "server received: " << std::string(buffer) << "\n";
+    }
+
+
+};
