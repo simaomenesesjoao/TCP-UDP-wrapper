@@ -216,7 +216,7 @@ public:
         if(verbose_level>0)
             std::cout << "Listening to message\n";
         
-        socklen_t claddr_len;// = sizeof(struct sockaddr_in);
+        socklen_t claddr_len = sizeof(struct sockaddr_in);
         
         char *client_ip = inet_ntoa(cliaddr.sin_addr);
         int client_port = ntohs(cliaddr.sin_port);
