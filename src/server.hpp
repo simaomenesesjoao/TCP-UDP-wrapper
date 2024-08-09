@@ -190,11 +190,16 @@ public:
         close(socket_fd);
     }
 
-    int send_data(const void *msg, int len){
-        
+    void print_current_address(){
         char *client_ip = inet_ntoa(cliaddr.sin_addr);
         int client_port = ntohs(cliaddr.sin_port);
-        std::cout << "Address before sendto. IP: " << client_ip << " Port: " << client_port << std::endl;
+        std::cout << "IP: " << client_ip << " Port: " << client_port << std::endl;
+
+    }
+
+    int send_data(const void *msg, int len){
+        
+        
 
         int n = -1;
         if(client_contacted)
@@ -203,10 +208,6 @@ public:
         else{
             std::cout << "Client has not contacted yet. I don't know where to send data.\n";
         }
-        client_ip = inet_ntoa(cliaddr.sin_addr);
-        client_port = ntohs(cliaddr.sin_port);
-        std::cout << "Address after sendto. IP: " << client_ip << " Port: " << client_port << std::endl;
-
     
         return n;
     }
@@ -217,19 +218,10 @@ public:
             std::cout << "Listening to message\n";
         
         socklen_t claddr_len = sizeof(struct sockaddr_in);
-        
-        char *client_ip = inet_ntoa(cliaddr.sin_addr);
-        int client_port = ntohs(cliaddr.sin_port);
-        std::cout << "Address before recvfrom. IP: " << client_ip << " Port: " << client_port << std::endl;
 
         int n = recvfrom(socket_fd, msg, len,  
                 MSG_WAITALL, ( struct sockaddr *) &cliaddr, 
                 &claddr_len);
-
-
-        client_ip = inet_ntoa(cliaddr.sin_addr);
-        client_port = ntohs(cliaddr.sin_port);
-        std::cout << "Address after recvfrom. IP: " << client_ip << " Port: " << client_port << std::endl;
 
         if(n>0)
             client_contacted = true;

@@ -163,10 +163,8 @@ public:
         close(socket_fd);
     }
 
-    int send_data(const void *msg, int len){
-
-
-        std::cout << "beffore\n" << std::flush;
+    void print_current_address(){
+        
         void *addr;
         char ipstr[INET6_ADDRSTRLEN];
         int port;
@@ -181,6 +179,13 @@ public:
         }
         inet_ntop(servinfo->ai_family, addr, ipstr, sizeof ipstr);
         std::cout << "Sending message to IP: " << ipstr << " Port: " << port << std::endl;
+
+    }
+    int send_data(const void *msg, int len){
+
+
+        std::cout << "beffore\n" << std::flush;
+        
 
 
         int n = sendto(socket_fd, msg, len, MSG_CONFIRM, 
