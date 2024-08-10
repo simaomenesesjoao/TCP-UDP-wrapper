@@ -94,8 +94,28 @@ public:
         return send(socket_fd, msg, len, 0);
     }
 
-    int receive_data(void *msg, int len){
-        return recv(socket_fd, msg, len, 0);
+    template <typename T>
+    int receive_data(T *msg, int len){
+        int total_received = 0;
+
+        while(total_received<len){
+            std::cout << "total_received" << total_received << "\n" << std::flush;
+            std::cout << "len" << len << "\n" << std::flush;
+            std::cout << "left" << len-total_received << "\n" << std::flush;
+            // int n = recv(socket_fd, msg, len,0);
+            int n = recv(socket_fd, msg+total_received, len-total_received, 
+                MSG_WAITALL);
+            std::cout << "n: " << n << "\n";
+            total_received += n;
+            
+        }
+
+        std::cout << "left recv data\n";
+
+        return total_received;
+
+        // return recv(socket_fd, msg, len, 0);
+
     }
     int check_activity(){
         fd_set readfds;
@@ -193,19 +213,30 @@ public:
         return n;
     }
 
-    int receive_data(void *msg, int len){
+    template <typename T>
+    int receive_data(T *msg, int len){
 
         // Receive
         if(verbose_level>0)
             std::cout << "Listening to message\n";
-        int n = recvfrom(socket_fd, msg, len,  
+
+        // int total_received = 0;
+        // int n;
+        // while(total_received<len){
+        //     n = recvfrom(socket_fd, msg+total_received, len-total_received, 
+        //         MSG_WAITALL, NULL, NULL);
+        //     total_received += n;
+
+        // }
+        
+        int total_received = recvfrom(socket_fd, msg, len, 
                 MSG_WAITALL, NULL, NULL);
 
         if(verbose_level>0)
-            std::cout << "message received, length " << n << " bytes\n";
+            std::cout << "message received, length " << total_received << " bytes\n";
 
 
-        return n;
+        return total_received;
     }
     int check_activity(){
         fd_set readfds;
@@ -227,8 +258,6 @@ public:
 
 class MultiClient{
 private:
-    TCPClient TCP;
-    UDPClient UDP;
 
     std::string getUDPport(){
         TCP.continuous_connect();
@@ -244,13 +273,21 @@ private:
     }
 
 public:
+
+    TCPClient TCP;
+    UDPClient UDP;
+
     MultiClient(std::string IP, std::string portTCP):TCP(IP,portTCP),UDP(IP, getUDPport()){
 
     }
 
     void handshake(){
-        std::string msg = "UDP OK";
-        UDP.send_data(msg.c_str(), msg.size()+1);
+        // std::string msg = "UDP OK";
+        char buffer_c[100] = "UDP OK";
+        // for(int i=0; i<msg.size()+1; i++) buffer_c[i] = msg.c_str()[i];
+
+        UDP.send_data(buffer_c, 100);
+        // UDP.send_data(msg.c_str(), msg.size()+1);
 
         // Receive acknowledgement that UDP packet was received
         char buffer[100];
@@ -259,8 +296,8 @@ public:
         std::cout << "Received: " << response << "\n";
 
         // Tell the server that the client is ready
-        msg = "Client ready";
-        TCP.send_data(msg.c_str(), msg.size()+1);
+        char buffer_d[100] = "Client ready";
+        TCP.send_data(buffer_d, 100);
     }
     
 
